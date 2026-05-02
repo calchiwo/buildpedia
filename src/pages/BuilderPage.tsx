@@ -5,7 +5,7 @@ import { useAuth } from "@/hooks/useAuth";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Edit, ShieldCheck, Eye, Rocket, Flag, Calendar, Settings } from "lucide-react";
+import { Edit, ShieldCheck, Eye, Rocket, Flag, Calendar, Settings, Heart } from "lucide-react";
 import { toast } from "sonner";
 import BuilderTimeline from "@/components/builder/BuilderTimeline";
 import BuilderStartups from "@/components/builder/BuilderStartups";
@@ -17,6 +17,13 @@ import BuilderShareCard from "@/components/builder/BuilderShareCard";
 import BuilderClaimSection from "@/components/builder/BuilderClaimSection";
 import BuilderManageSection from "@/components/builder/BuilderManageSection";
 import ReactMarkdown from "react-markdown";
+
+const STAGE_LABELS: { [key: string]: string } = {
+  early_stage: "Early stage",
+  pre_seed: "Pre-seed",
+  seed: "Seed",
+  series_a: "Series A",
+};
 
 const BuilderPage = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -214,6 +221,50 @@ const BuilderPage = () => {
               </div>
             </dl>
           </div>
+
+          {founder.cofound_seeking && (
+            <div className="border border-border rounded-lg p-4 bg-card">
+              <div className="flex items-center gap-2 mb-3">
+                <Heart className="h-4 w-4 text-accent" />
+                <h3 className="font-display text-sm font-semibold text-foreground">Looking for Cofounders</h3>
+              </div>
+              <div className="space-y-3 text-sm">
+                {founder.cofound_roles && founder.cofound_roles.length > 0 && (
+                  <div>
+                    <p className="text-muted-foreground font-medium mb-1">Seeking:</p>
+                    <div className="flex flex-wrap gap-1.5">
+                      {founder.cofound_roles.map((role) => (
+                        <Badge key={role} variant="secondary" className="text-xs py-0.5 px-2">
+                          {role}
+                        </Badge>
+                      ))}
+                    </div>
+                  </div>
+                )}
+                {founder.cofound_stage && (
+                  <div>
+                    <p className="text-muted-foreground font-medium">Stage:</p>
+                    <p className="text-foreground">{STAGE_LABELS[founder.cofound_stage] || founder.cofound_stage}</p>
+                  </div>
+                )}
+                {founder.cofound_focus_area && (
+                  <div>
+                    <p className="text-muted-foreground font-medium">Focus:</p>
+                    <p className="text-foreground">{founder.cofound_focus_area}</p>
+                  </div>
+                )}
+                {founder.cofound_location_pref && (
+                  <div>
+                    <p className="text-muted-foreground font-medium">Location:</p>
+                    <p className="text-foreground">{founder.cofound_location_pref}</p>
+                  </div>
+                )}
+              </div>
+              <Button className="w-full mt-4" size="sm">
+                Express Interest
+              </Button>
+            </div>
+          )}
 
           <BuilderShareCard
             founderName={founder.founder_name}

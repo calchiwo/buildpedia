@@ -1,5 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
-import { Search, Plus, Trophy, LogIn, LogOut, User, Heart } from "lucide-react";
+import { Search, Plus, Trophy, LogIn, LogOut, User, Heart, Users } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
@@ -23,6 +23,9 @@ const SiteHeader = () => {
         <nav className="hidden md:flex items-center gap-1">
           <Button variant="ghost" size="sm" onClick={() => navigate("/search")} className="gap-1.5 text-muted-foreground">
             <Search className="h-4 w-4" /> Search
+          </Button>
+          <Button variant="ghost" size="sm" onClick={() => navigate("/cofounder-search")} className="gap-1.5 text-muted-foreground">
+            <Users className="h-4 w-4" /> Cofounders
           </Button>
           <Button variant="ghost" size="sm" onClick={() => navigate("/leaderboard")} className="gap-1.5 text-muted-foreground">
             <Trophy className="h-4 w-4" /> Leaderboard

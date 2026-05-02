@@ -138,6 +138,12 @@ export type Database = {
           updated_at: string
           verified_founder: boolean
           view_count: number
+          cofound_seeking: boolean
+          cofound_roles: string[] | null
+          cofound_stage: string | null
+          cofound_focus_area: string | null
+          cofound_location_pref: string | null
+          cofound_updated_at: string | null
         }
         Insert: {
           build_score?: number
@@ -152,6 +158,12 @@ export type Database = {
           updated_at?: string
           verified_founder?: boolean
           view_count?: number
+          cofound_seeking?: boolean
+          cofound_roles?: string[] | null
+          cofound_stage?: string | null
+          cofound_focus_area?: string | null
+          cofound_location_pref?: string | null
+          cofound_updated_at?: string | null
         }
         Update: {
           build_score?: number
@@ -166,6 +178,12 @@ export type Database = {
           updated_at?: string
           verified_founder?: boolean
           view_count?: number
+          cofound_seeking?: boolean
+          cofound_roles?: string[] | null
+          cofound_stage?: string | null
+          cofound_focus_area?: string | null
+          cofound_location_pref?: string | null
+          cofound_updated_at?: string | null
         }
         Relationships: []
       }

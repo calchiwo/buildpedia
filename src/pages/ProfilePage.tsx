@@ -6,8 +6,16 @@ import { useAuth } from "@/hooks/useAuth";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Badge } from "@/components/ui/badge";
 import { toast } from "sonner";
-import { User, Edit } from "lucide-react";
+import { User, Edit, Heart } from "lucide-react";
+
+const STAGE_LABELS: { [key: string]: string } = {
+  early_stage: "Early stage",
+  pre_seed: "Pre-seed",
+  seed: "Seed",
+  series_a: "Series A",
+};
 
 const ProfilePage = () => {
   const { user } = useAuth();
@@ -101,6 +109,43 @@ const ProfilePage = () => {
           <p className="text-muted-foreground text-sm">No pages created yet.</p>
         )}
       </div>
+
+      {myPages && myPages.length > 0 && (
+        <div className="border border-border rounded-lg p-6 bg-card">
+          <div className="flex items-center justify-between mb-4">
+            <h2 className="font-display text-xl text-foreground flex items-center gap-2">
+              <Heart className="h-5 w-5 text-accent" />
+              Cofounder Preferences
+            </h2>
+          </div>
+
+          {myPages.some((p) => {
+            const pageData = myPages.find((page) => page.slug === p.slug);
+            return pageData;
+          }) ? (
+            <div className="space-y-4">
+              {myPages.map((p) => (
+                <div key={p.slug} className="border-t border-border/50 pt-4 first:border-t-0 first:pt-0">
+                  <h3 className="font-medium text-foreground mb-3">{p.founder_name}</h3>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() => navigate(`/edit/${p.slug}`)}
+                    className="gap-1.5 text-xs"
+                  >
+                    <Edit className="h-3 w-3" />
+                    Configure Cofounder Search
+                  </Button>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <p className="text-muted-foreground text-sm">
+              Visit your builder page and click Edit to configure cofounder preferences.
+            </p>
+          )}
+        </div>
+      )}
     </div>
   );
 };

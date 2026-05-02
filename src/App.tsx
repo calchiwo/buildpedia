@@ -13,6 +13,7 @@ import LeaderboardPage from "./pages/LeaderboardPage";
 import CreatePage from "./pages/CreatePage";
 import EditPage from "./pages/EditPage";
 import ProfilePage from "./pages/ProfilePage";
+import CofounderSearchPage from "./pages/CofounderSearchPage";
 import DonationPage from "./pages/DonationPage";
 import NotFound from "./pages/NotFound";
 
@@ -30,6 +31,7 @@ const App = () => (
             <Route path="/" element={<Index />} />
             <Route path="/auth" element={<AuthPage />} />
             <Route path="/search" element={<SearchPage />} />
+            <Route path="/cofounder-search" element={<CofounderSearchPage />} />
             <Route path="/leaderboard" element={<LeaderboardPage />} />
             <Route path="/create" element={<CreatePage />} />
             <Route path="/edit/:slug" element={<EditPage />} />
