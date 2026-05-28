@@ -1,5 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
-import { Search, Plus, Trophy, LogIn, LogOut, User, Heart } from "lucide-react";
+import { Search, Plus, Trophy, LogIn, LogOut, User, Heart, Github } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
@@ -38,6 +38,17 @@ const SiteHeader = () => {
         </nav>
 
         <div className="flex items-center gap-2">
+          <Button 
+            variant="ghost" 
+            size="sm" 
+            asChild
+            className="gap-1.5 text-muted-foreground hover:text-foreground"
+          >
+            <a href="https://github.com/buildpedia/buildpedia" target="_blank" rel="noopener noreferrer">
+              <Github className="h-4 w-4" />
+              <span className="hidden sm:inline">Star</span>
+            </a>
+          </Button>
           {user ? (
             <>
               <Button variant="ghost" size="sm" onClick={() => navigate("/profile")} className="gap-1.5">
